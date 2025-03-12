@@ -5,7 +5,7 @@ on:
 
 jobs:
   ci:
-    name: "Test build (Jekyll ${{ matrix.jekyll_version }} on ${{ matrix.os.label }} with Ruby ${{ matrix.ruby_version }})"
+    name: "Jekyll ${{ matrix.jekyll_version }} / ${{ matrix.os.label }} / Ruby ${{ matrix.ruby_version }}"
     runs-on: ${{ matrix.os.image }}
     env:
       JEKYLL_VERSION: ${{ matrix.jekyll_version }}
