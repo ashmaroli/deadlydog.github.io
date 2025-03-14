@@ -9,6 +9,7 @@ jobs:
     runs-on: ${{ matrix.os.image }}
     env:
       JEKYLL_VERSION: ${{ matrix.jekyll_version }}
+      REQUIRE_JEMOJI: true
     strategy:
       fail-fast: false
       matrix:

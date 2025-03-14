@@ -11,8 +11,10 @@ group :jekyll_plugins do
   gem "jekyll-paginate"
   gem "jekyll-remote-theme"
   gem "jekyll-sitemap"
-  gem "jemoji"
+  gem "jemoji" if ENV["REQUIRE_JEMOJI"]
 end
+
+gem "memory_profiler"
 
 if Gem.win_platform?
   gem "tzinfo-data"  # Timezone files for Windows.

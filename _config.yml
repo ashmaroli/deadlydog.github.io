@@ -273,7 +273,6 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-remote-theme
-  - jemoji
   - jekyll-include-cache
 
 # Mimic GitHub Pages with --safe
@@ -282,7 +281,7 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jemoji
+  - jekyll-remote-theme
   - jekyll-include-cache
 
 # Archives

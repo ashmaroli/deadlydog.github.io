@@ -1,0 +1,58 @@
+name: Memory Usage Profile
+
+on:
+  push:
+
+jobs:
+  build:
+    name: "Jekyll ${{ matrix.jekyll_version }} / ${{ matrix.os.label }} / Ruby ${{ matrix.ruby_version }}"
+    runs-on: ${{ matrix.os.image }}
+    env:
+      JEKYLL_VERSION: ${{ matrix.jekyll_version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        jekyll_version: ["~> 3.10", "~> 4.4"]
+        ruby_version: ["2.7", "3.0", "3.1", "3.2", "3.3"]
+        os:
+          - label: Linux
+            image: "ubuntu-latest"
+          - label: Windows
+            image: "windows-latest"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Profile memory usage on building with Jekyll
+        run: bundle exec ruby .github/workflows/scripts/profiler.rb
+
+  emojify:
+    name: "Emojify / Jekyll ${{ matrix.jekyll_version }} / ${{ matrix.os.label }} / Ruby ${{ matrix.ruby_version }}"
+    runs-on: ${{ matrix.os.image }}
+    env:
+      REQUIRE_JEMOJI: true
+      JEKYLL_VERSION: ${{ matrix.jekyll_version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        jekyll_version: ["~> 3.10", "~> 4.4"]
+        ruby_version: ["2.7", "3.0", "3.1", "3.2", "3.3"]
+        os:
+          - label: Linux
+            image: "ubuntu-latest"
+          - label: Windows
+            image: "windows-latest"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: "Set up Ruby ${{ matrix.ruby_version }}"
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
+      - name: Profile memory usage on initializing emojify
+        run: bundle exec ruby .github/workflows/scripts/profiler.rb jemoji
